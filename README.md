@@ -6,7 +6,7 @@ A research repository for a hybrid soft-rigid crawling robot called CRAWLER.
 ```
 hybrid-crawler/
 ├── crawler_control_open_loop/          # ROS2 packages for robot with open-loop control
-│   ├── maestro_bridge_updated/         # Maestro bridge and Maestro YAML parameters
+│   ├── maestro_bridge/                 # Maestro bridge and Maestro YAML parameters
 │   └── src/                            
 │       ├── crawler_bringup/            # Launch package that starts the full crawler control stack
 │       ├── crawler_control/            # Low-level joint control, Maestro serial bridge, reached estimator, and goal-to-setpoint relay
