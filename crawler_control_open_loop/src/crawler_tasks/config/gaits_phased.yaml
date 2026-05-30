@@ -4,7 +4,6 @@ locomotion_task_server:
     rate_hz: 100.0
     default_require: [J1, J2, J3, J4, J5, J6, J7]
     settle_consecutive: 2
-    between_phase_wait_s: 0.20
     inter_cycle_wait_s: 0.20   # if omitted, equals after_phase_wait_s
     sleep_step_s: 0.005
     min_dwell_s: 0.05          # (optional) time to let motion begin before checking reached
@@ -17,7 +16,7 @@ locomotion_task_server:
     joint_limits:
       J1: {min: -10.00, max: 10.00}
       J2: {min: -10.00, max: 10.00}
-      J3: {min: -3.14159265, max:  3.14159265}
+      J3: {min: -0.05, max: 0.05}
       J4: {min: -21.9911486, max:  21.9911486}
       J5: {min: -21.9911486, max:  21.9911486}
       J6: {min: -1.57079633, max:  1.57079633}
@@ -27,6 +26,7 @@ locomotion_task_server:
 
       forward:
         meters_per_cycle: 0.10
+        between_phase_wait_s: 0.20
         phases:
           p1:
             joints:
@@ -81,6 +81,7 @@ locomotion_task_server:
 
       backward:
         meters_per_cycle: 0.10
+        between_phase_wait_s: 0.20
         phases:
           p1:
             joints:
@@ -92,6 +93,7 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
           p2:
             joints:
               J1: {mode: hold}
@@ -102,6 +104,7 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: false, pumps_back: false}
+            require: [J2]
           p3:
             joints:
               J1: {mode: move_rel, dpos:  0.10, vmax: 0.15, amax: 2.0}
@@ -112,6 +115,7 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J1, J2, J4, J5]
           p4:
             joints:
               J1: {mode: move_rel, dpos: -0.10, vmax: 0.15, amax: 2.0}
@@ -122,9 +126,11 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: false, pumps_front: false, solenoids_back: true, pumps_back: true}
+            require: [J1, J4, J5]
 
       right:
-        meters_per_cycle: 0.05      
+        meters_per_cycle: 0.05
+        between_phase_wait_s: 0.20
         phases:
           p1:
             joints:
@@ -136,6 +142,8 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
+
           p2:
             joints:
               J1: {mode: hold}
@@ -146,16 +154,20 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
+
           p3:
             joints:
               J1: {mode: hold}
               J2: {mode: hold}
-              J3: {mode: move_rel, dpos: 0.30, vmax: 1.2, amax: 3.0}
+              J3: {mode: move_abs, pos:  0.05, vmax: 0.05, amax: 0.20}
               J4: {mode: hold}
               J5: {mode: hold}
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J3]
+
           p4:
             joints:
               J1: {mode: hold}
@@ -166,6 +178,8 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
+
           p5:
             joints:
               J1: {mode: hold}
@@ -176,19 +190,23 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: false, pumps_front: false, solenoids_back: false, pumps_back: false}
+            require: []
+
           p6:
             joints:
               J1: {mode: hold}
               J2: {mode: hold}
-              J3: {mode: move_rel, dpos: -0.30, vmax: 1.2, amax: 3.0}
+              J3: {mode: move_abs, pos:  0.00, vmax: 0.05, amax: 0.20}
               J4: {mode: hold}
               J5: {mode: hold}
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: false, pumps_front: false, solenoids_back: false, pumps_back: false}
-            
+            require: [J3]
+
       left:
-        meters_per_cycle: 0.05      
+        meters_per_cycle: 0.05
+        between_phase_wait_s: 0.20
         phases:
           p1:
             joints:
@@ -200,6 +218,8 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
+
           p2:
             joints:
               J1: {mode: hold}
@@ -210,16 +230,20 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
+
           p3:
             joints:
               J1: {mode: hold}
               J2: {mode: hold}
-              J3: {mode: move_rel, dpos: -0.30, vmax: 1.2, amax: 3.0}
+              J3: {mode: move_abs, pos: -0.05, vmax: 0.05, amax: 0.20}
               J4: {mode: hold}
               J5: {mode: hold}
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J3]
+
           p4:
             joints:
               J1: {mode: hold}
@@ -230,6 +254,8 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: true, pumps_front: true, solenoids_back: true, pumps_back: true}
+            require: [J4, J5]
+
           p5:
             joints:
               J1: {mode: hold}
@@ -240,15 +266,16 @@ locomotion_task_server:
               J6: {mode: hold}
               J7: {mode: hold}
             actuators: {solenoids_front: false, pumps_front: false, solenoids_back: false, pumps_back: false}
+            require: []
+
           p6:
             joints:
               J1: {mode: hold}
               J2: {mode: hold}
-              J3: {mode: move_rel, dpos: 0.30, vmax: 1.2, amax: 3.0}
+              J3: {mode: move_abs, pos:  0.00, vmax: 0.05, amax: 0.20}
               J4: {mode: hold}
               J5: {mode: hold}
               J6: {mode: hold}
               J7: {mode: hold}
-            actuators: {solenoids_front: false, pumps_front: false, solenoids_back: false, pumps_back: false}            
-
-
+            actuators: {solenoids_front: false, pumps_front: false, solenoids_back: false, pumps_back: false}
+            require: [J3]

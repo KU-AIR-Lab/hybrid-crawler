@@ -1,8 +1,17 @@
-soft_pressure_combiner:
+soft_pressure_combiner_front:
   ros__parameters:
     rate_hz: 50.0
-    topic_p_nom_d: /soft/p_nom_d
-    topic_del_p: /soft/del_p
-    topic_p_d: /soft/p_d
+    topic_p_nom_d: /soft/front/p_nom_d
+    topic_del_p: /soft/front/del_p
+    topic_p_d: /soft/front/p_d
+    p_min: -1000000000.0
+    p_max: 1000000000.0
+
+soft_pressure_combiner_rear:
+  ros__parameters:
+    rate_hz: 50.0
+    topic_p_nom_d: /soft/rear/p_nom_d
+    topic_del_p: /soft/rear/del_p
+    topic_p_d: /soft/rear/p_d
     p_min: -1000000000.0
     p_max: 1000000000.0

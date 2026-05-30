@@ -1,4 +1,4 @@
-soft_force_pid:
+soft_force_pid_front:
   ros__parameters:
     kp: 0.6
     ki: 0.05
@@ -7,6 +7,19 @@ soft_force_pid:
     u_min: -1.0
     u_max: 1.0
     integral_limit: 10.0
-    topic_Fc_d: /soft/Fc_d
-    topic_Fc_act: /soft/Fc_act
-    topic_cmd: /soft/contact_force_cmd
+    topic_Fc_d: /soft/front/Fc_d
+    topic_Fc_act: /soft/front/Fc_act
+    topic_cmd: /soft/front/contact_force_cmd
+
+soft_force_pid_rear:
+  ros__parameters:
+    kp: 0.6
+    ki: 0.05
+    kd: 0.01
+    rate_hz: 50.0
+    u_min: -1.0
+    u_max: 1.0
+    integral_limit: 10.0
+    topic_Fc_d: /soft/rear/Fc_d
+    topic_Fc_act: /soft/rear/Fc_act
+    topic_cmd: /soft/rear/contact_force_cmd

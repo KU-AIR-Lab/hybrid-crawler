@@ -1,15 +1,7 @@
-soft_force_pid:
-  ros__parameters:
-    kp: 0.6
-    ki: 0.05
-    kd: 0.01
-    rate_hz: 50.0
-    u_min: -1.0
-    u_max: 1.0
-    integral_limit: 10.0
-    topic_Fc_d: /soft/Fc_d
-    topic_Fc_act: /soft/Fc_act
-    topic_cmd: /soft/contact_force_cmd
+# Unified control layout:
+#   Cable left/right sensors are fused into one /cable/Fc_act and one cable force controller.
+#   Soft front-left/front-right are fused into one /soft/front/* control loop.
+#   Soft rear-left/rear-right are fused into one /soft/rear/* control loop.
 
 cable_force_pid:
   ros__parameters:
@@ -24,16 +16,51 @@ cable_force_pid:
     topic_Fc_act: /cable/Fc_act
     topic_cmd: /cable/contact_force_cmd
 
-soft_pressure_combiner:
+soft_force_pid_front:
+  ros__parameters:
+    kp: 0.6
+    ki: 0.05
+    kd: 0.01
+    rate_hz: 50.0
+    u_min: -1.0
+    u_max: 1.0
+    integral_limit: 10.0
+    topic_Fc_d: /soft/front/Fc_d
+    topic_Fc_act: /soft/front/Fc_act
+    topic_cmd: /soft/front/contact_force_cmd
+
+soft_force_pid_rear:
+  ros__parameters:
+    kp: 0.6
+    ki: 0.05
+    kd: 0.01
+    rate_hz: 50.0
+    u_min: -1.0
+    u_max: 1.0
+    integral_limit: 10.0
+    topic_Fc_d: /soft/rear/Fc_d
+    topic_Fc_act: /soft/rear/Fc_act
+    topic_cmd: /soft/rear/contact_force_cmd
+
+soft_pressure_combiner_front:
   ros__parameters:
     rate_hz: 50.0
-    topic_p_nom_d: /soft/p_nom_d
-    topic_del_p: /soft/del_p
-    topic_p_d: /soft/p_d
+    topic_p_nom_d: /soft/front/p_nom_d
+    topic_del_p: /soft/front/del_p
+    topic_p_d: /soft/front/p_d
     p_min: -1000000000.0
     p_max: 1000000000.0
 
-pump_pid_controller:
+soft_pressure_combiner_rear:
+  ros__parameters:
+    rate_hz: 50.0
+    topic_p_nom_d: /soft/rear/p_nom_d
+    topic_del_p: /soft/rear/del_p
+    topic_p_d: /soft/rear/p_d
+    p_min: -1000000000.0
+    p_max: 1000000000.0
+
+pump_pid_front:
   ros__parameters:
     kp: 0.8
     ki: 0.1
@@ -42,14 +69,35 @@ pump_pid_controller:
     u_min: 0.0
     u_max: 1.0
     integral_limit: 10.0
-    topic_p_d: /soft/p_d
-    topic_p_act: /soft/p_act
-    topic_pwm: /soft/pump_pwm
+    topic_p_d: /soft/front/p_d
+    topic_p_act: /soft/front/p_act
+    topic_pwm: /soft/front/pump_pwm
 
-pump_bangbang_controller:
+pump_pid_rear:
+  ros__parameters:
+    kp: 0.8
+    ki: 0.1
+    kd: 0.02
+    rate_hz: 50.0
+    u_min: 0.0
+    u_max: 1.0
+    integral_limit: 10.0
+    topic_p_d: /soft/rear/p_d
+    topic_p_act: /soft/rear/p_act
+    topic_pwm: /soft/rear/pump_pwm
+
+pump_bangbang_front:
   ros__parameters:
     deadband: 0.02
     rate_hz: 50.0
-    topic_p_d: /soft/p_d
-    topic_p_act: /soft/p_act
-    topic_on: /soft/pump_on
+    topic_p_d: /soft/front/p_d
+    topic_p_act: /soft/front/p_act
+    topic_on: /soft/front/pump_on
+
+pump_bangbang_rear:
+  ros__parameters:
+    deadband: 0.02
+    rate_hz: 50.0
+    topic_p_d: /soft/rear/p_d
+    topic_p_act: /soft/rear/p_act
+    topic_on: /soft/rear/pump_on

@@ -1,12 +1,17 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>sensor_fuser</name>
-  <version>0.1.0</version>
-  <description>Fuses raw sensor arrays into scalar feedback topics for controllers.</description>
+  <version>0.2.0</version>
+  <description>Fuses raw pressure/contact sensor arrays into unified scalar feedback topics.</description>
   <maintainer email="abdoorasheed@gmail.com">Abdur Rosyid</maintainer>
   <license>MIT</license>
-  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <buildtool_depend>ament_python</buildtool_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
-  <export><build_type>ament_python</build_type></export>
+  <exec_depend>ament_index_python</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
 </package>

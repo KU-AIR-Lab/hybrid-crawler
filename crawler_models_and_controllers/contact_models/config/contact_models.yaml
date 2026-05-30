@@ -1,0 +1,14 @@
+cable_contact_model:
+  ros__parameters:
+    topic_cmd: /cable/contact_force_cmd
+    topic_del_alp: /cable/del_alp
+
+soft_contact_model_front:
+  ros__parameters:
+    topic_cmd: /soft/front/contact_force_cmd
+    topic_del_p: /soft/front/del_p
+
+soft_contact_model_rear:
+  ros__parameters:
+    topic_cmd: /soft/rear/contact_force_cmd
+    topic_del_p: /soft/rear/del_p

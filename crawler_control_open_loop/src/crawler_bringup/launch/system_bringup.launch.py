@@ -15,7 +15,7 @@ def generate_launch_description():
 
     # Gaits YAML
     default_gaits = os.path.join(
-        get_package_share_directory('crawler_tasks'), 'config', 'gaits.yaml'
+        get_package_share_directory('crawler_tasks'), 'config', 'gaits_phased.yaml'
     )
     gaits_arg = DeclareLaunchArgument('gaits_file', default_value=default_gaits,
                                       description='Path to gaits.yaml')

@@ -1,0 +1,16 @@
+cable_ik_node:
+  ros__parameters:
+    rate_hz: 100.0
+    topic_alp_nom_d: /cable/alp_nom_d
+    topic_del_alp: /cable/del_alp
+    topic_joint_cmd: /cable/joint_cmd
+
+soft_forward_statics_front:
+  ros__parameters:
+    topic_alp_nom_d: /soft/front/alp_nom_d
+    topic_p_nom_d: /soft/front/p_nom_d
+
+soft_forward_statics_rear:
+  ros__parameters:
+    topic_alp_nom_d: /soft/rear/alp_nom_d
+    topic_p_nom_d: /soft/rear/p_nom_d

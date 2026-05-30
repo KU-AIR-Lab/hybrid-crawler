@@ -4,7 +4,7 @@ package_name = 'crawler_controllers'
 
 setup(
     name=package_name,
-    version='0.3.0',
+    version='0.4.0',
     packages=find_packages(include=('crawler_controllers*',)),
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
@@ -23,7 +23,7 @@ setup(
     zip_safe=True,
     maintainer='Abdur Rosyid',
     maintainer_email='abdoorasheed@gmail.com',
-    description='Controllers for cable-driven and soft arms.',
+    description='Controllers for unified cable and front/rear soft arm control.',
     license='BSD-3-Clause',
     entry_points={
         'console_scripts': [

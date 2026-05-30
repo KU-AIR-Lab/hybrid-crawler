@@ -5,7 +5,7 @@
   <description>Reads 18 pressure sensors from Teensy over USB and publishes ROS arrays.</description>
   <maintainer email="abdoorasheed@gmail.com">Abdur Rosyid</maintainer>
   <license>MIT</license>
-  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_python</buildtool_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>pyserial</exec_depend>

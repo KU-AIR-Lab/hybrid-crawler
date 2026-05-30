@@ -1,7 +1,15 @@
-pump_bangbang_controller:
+pump_bangbang_front:
   ros__parameters:
     deadband: 0.02
     rate_hz: 50.0
-    topic_p_d: /soft/p_d
-    topic_p_act: /soft/p_act
-    topic_on: /soft/pump_on
+    topic_p_d: /soft/front/p_d
+    topic_p_act: /soft/front/p_act
+    topic_on: /soft/front/pump_on
+
+pump_bangbang_rear:
+  ros__parameters:
+    deadband: 0.02
+    rate_hz: 50.0
+    topic_p_d: /soft/rear/p_d
+    topic_p_act: /soft/rear/p_act
+    topic_on: /soft/rear/pump_on
