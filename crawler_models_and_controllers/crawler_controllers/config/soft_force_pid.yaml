@@ -6,6 +6,7 @@ soft_force_pid:
     rate_hz: 50.0
     u_min: -1.0
     u_max: 1.0
+    integral_limit: 10.0
     topic_Fc_d: /soft/Fc_d
     topic_Fc_act: /soft/Fc_act
     topic_cmd: /soft/contact_force_cmd

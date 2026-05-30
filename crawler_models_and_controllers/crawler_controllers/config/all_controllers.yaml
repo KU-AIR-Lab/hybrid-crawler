@@ -6,6 +6,7 @@ soft_force_pid:
     rate_hz: 50.0
     u_min: -1.0
     u_max: 1.0
+    integral_limit: 10.0
     topic_Fc_d: /soft/Fc_d
     topic_Fc_act: /soft/Fc_act
     topic_cmd: /soft/contact_force_cmd
@@ -18,9 +19,19 @@ cable_force_pid:
     rate_hz: 50.0
     u_min: -1.0
     u_max: 1.0
+    integral_limit: 10.0
     topic_Fc_d: /cable/Fc_d
     topic_Fc_act: /cable/Fc_act
     topic_cmd: /cable/contact_force_cmd
+
+soft_pressure_combiner:
+  ros__parameters:
+    rate_hz: 50.0
+    topic_p_nom_d: /soft/p_nom_d
+    topic_del_p: /soft/del_p
+    topic_p_d: /soft/p_d
+    p_min: -1000000000.0
+    p_max: 1000000000.0
 
 pump_pid_controller:
   ros__parameters:
@@ -30,6 +41,7 @@ pump_pid_controller:
     rate_hz: 50.0
     u_min: 0.0
     u_max: 1.0
+    integral_limit: 10.0
     topic_p_d: /soft/p_d
     topic_p_act: /soft/p_act
     topic_pwm: /soft/pump_pwm
@@ -37,6 +49,7 @@ pump_pid_controller:
 pump_bangbang_controller:
   ros__parameters:
     deadband: 0.02
+    rate_hz: 50.0
     topic_p_d: /soft/p_d
     topic_p_act: /soft/p_act
     topic_on: /soft/pump_on
