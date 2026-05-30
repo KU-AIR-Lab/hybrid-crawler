@@ -1,0 +1,43 @@
+maestro_bridge:
+  ros__parameters:
+    port: "/dev/ttyACM0"        # or a stable by-id path
+    neutral_on_startup: true
+    baud: 9600
+    rate_hz: 50.0
+    debug_log: false
+    stale_ms: 500
+
+    # Maestro channel map
+    ch_servo: [0,1,2,3,4,5,6]   # J1..J7
+    ch_sol_front: 10
+    ch_pump_front: 11
+    ch_sol_back: 12
+    ch_pump_back: 13
+
+    # ===== CR servos (J1,J2) =====
+    j12_center_us: [1500, 1500]
+    j12_deadband_us: [60, 60]
+    j12_k_us_per_mps: [6000.0, 6000.0]    # EXAMPLE: tune from your test (Δus / v_test)
+    j12_vmax_mps_limit: [0.10, 0.10]      # clamp incoming speed commands for safety
+
+    # ===== Revolute joints (J3..J7) =====
+    j37_center_us:   [1500, 1500, 1500, 1500, 1500]
+    j37_k_us_per_rad: [ 600,  600,  600,  900,  900]   # EXAMPLES: put your fitted gains here
+    j37_min_us:      [ 890,  900,  900,  700,  700]
+    j37_max_us:      [2130, 2100, 2100, 2300, 2300]
+
+    # Joint limits (same as before)
+    joint_limits:
+      J1: {min: 0.00, max: 0.20}
+      J2: {min: 0.00, max: 0.20}
+      J3: {min: -3.14159265, max:  3.14159265}
+      J4: {min: -21.9911486, max: 21.9911486}
+      J5: {min: -21.9911486, max: 21.9911486}
+      J6: {min: -1.57079633, max:  1.57079633}
+      J7: {min: -1.57079633, max:  1.57079633}
+
+    # ===== Maestro device-side slew (optional) =====
+    # If >0 we set them on startup. Keep modest values; you already do some slewing in gaits.
+    set_speed: [5,5,10,10,10,12,12]   # Maestro units (device-native)
+    set_accel: [2,2, 5, 5, 5, 6, 6]   # Maestro units (device-native)
+

@@ -1,0 +1,17 @@
+# Goal
+string gait          # "forward" | "backward" | "left" | "right"
+float64 distance     # meters (if >0 and meters_per_cycle>0, run for required cycles)
+float64 speed        # scalar multiplier for hz_base (>=0; if 0 uses hz_base)
+float64 duration     # seconds (if >0, overrides distance)
+float64 timeout      # seconds (upper bound on total action time)
+
+---
+# Result
+bool success
+string message
+
+---
+# Feedback
+float32 elapsed
+int32  cycles_done
+float32 progress

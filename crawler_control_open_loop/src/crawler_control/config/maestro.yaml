@@ -1,0 +1,79 @@
+maestro_bridge:
+  ros__parameters:
+    port: "/dev/ttyACM0"        # or better: a stable /dev/serial/by-id/... path
+    #port: "/dev/serial/by-id/usb-Pololu_Corporation_Pololu_Mini_Maestro_18-Channel_Controller_..."
+    baud: 9600
+    rate_hz: 100.0     # faster loop helps
+    debug_log: false
+    stale_ms: 2000
+    neutral_on_startup: true
+
+    # Maestro channel map
+    ch_servo: [0,1,2,3,4,5,6]   # J1..J7
+    ch_sol_front: 10
+    ch_pump_front: 11
+    ch_sol_back: 12
+    ch_pump_back: 13
+
+    # ===== CR servos (J1,J2) =====
+    j12_mode: "position"           # "position" or "speed"
+
+    # Physical calibration (lets bridge compute j12_k_us_per_mps automatically)
+    j12_pitch_m_per_rev: [0.005, 0.005]   # 5 mm / rev
+    #j12_us_per_rps:      [250.0, 250.0]   # µs needed for 1 rps at PWM output
+    j12_us_per_rps:      [60.0, 60.0] 
+    j12_compute_k: true
+
+    # Device-side limits for J1/J2 only (the bridge writes these on startup)
+    maestro_speed: [0, 0]    # 0 = unlimited (use 0 while tuning)
+    maestro_accel: [0, 0]    # 0 = unlimited
+
+    # PWM mapping / motion shaping
+    j12_center_us:     [1500, 1500]
+    j12_deadband_us:   [120, 120]   
+    j12_min_drive_us: [200, 200]     # breakaway pulse (per side, *added* to deadband)
+    j12_gain_us_per_mps: [8000.00, 8000.00]# slope from m/s to extra µs; tune this
+    j12_max_offset_us: [1500, 1500]  # # cap around neutral; allow large throw so we don’t clamp
+    j12_vmax_mps_limit: [0.10, 0.10] # safety cap above your 0.04 m/s target
+    j12_amax_mps2: [1.2, 1.2]
+    j12_pos_tol_m: [0.001, 0.001]
+
+    # (If you want to override the computed slope, uncomment and set explicitly)
+    # j12_k_us_per_mps: [6000.0, 6000.0]
+    
+    #j12_pos_cmd_scale: [1.0, 1.0]        
+    j12_pos_cmd_scale: [10.0, 10.0]     # ← 10× position commands to compensate 2→20 turns
+    j12_use_limits: false               # ← temporarily disable limits so scaled targets aren’t clipped
+    # (or widen limits for J1/J2 during calibration, e.g.)
+    # joint_limits:
+    #   J1: {min: -10.0, max: 10.0}
+    #   J2: {min: -10.0, max: 10.0}
+
+    # ===== Revolute joints (J3..J7) =====
+    j37_center_us:     [1500, 1500, 1500, 1500, 1500]
+    j37_k_us_per_rad:  [600, 600, 600, 900, 900]
+    j37_min_us:        [890, 900, 900, 700, 700]
+    j37_max_us:        [2130, 2100, 2100, 2300, 2300]
+    
+    # ===== J3 slider model (timing belt) =====
+    # Pulley radius [m] and home slider position [m] when J3 angle = 0
+    j3_pulley_radius_m: 0.005    # example: 5 mm radius
+    j3_home_x_m: 0.0             # slider x = 0 at center
+    j3_min_x_m: -0.05            # 5 cm left from home
+    j3_max_x_m:  0.05            # 5 cm right from home    
+
+    # ===== Joint limits =====
+    joint_limits:
+      #J1: {min: -0.20, max: 0.20}
+      #J2: {min: -0.20, max: 0.20}
+      J1: {min: -10.00, max: 10.00}
+      J2: {min: -10.00, max: 10.00}
+      J3: {min: -3.14159265, max:  3.14159265}
+      J4: {min: -21.9911486, max:  21.9911486}
+      J5: {min: -21.9911486, max:  21.9911486}
+      J6: {min: -1.57079633, max:  1.57079633}
+      J7: {min: -1.57079633, max:  1.57079633}
+
+    # Optional device-side slew for J3..J7 only (leave J1/J2 effectively 0 in the device)
+    set_speed: [0,0,10,10,10,12,12]
+    set_accel: [0,0, 5, 5, 5, 6, 6]

@@ -1,0 +1,4 @@
+    j3_pulley_radius_m: 0.010    # 10 mm radius
+    j3_home_x_m: 0.0             # slider x = 0 at center
+    j3_min_x_m: -0.20            # 20 cm left from home
+    j3_max_x_m:  0.20            # 20 cm right from home

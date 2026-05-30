@@ -1,0 +1,6 @@
+pump_bangbang_controller:
+  ros__parameters:
+    deadband: 0.02
+    topic_p_d: /soft/p_d
+    topic_p_act: /soft/p_act
+    topic_on: /soft/pump_on

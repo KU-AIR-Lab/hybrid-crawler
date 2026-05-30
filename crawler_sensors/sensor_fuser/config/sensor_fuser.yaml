@@ -1,0 +1,8 @@
+sensor_fuser:
+  ros__parameters:
+    cable_left_reduce: "max"
+    cable_right_reduce: "max"
+    soft_force_reduce: "identity"
+    soft_pressure_reduce: "identity"
+    alpha_force: 0.2
+    alpha_pressure: 0.2

@@ -1,0 +1,6 @@
+teensy_serial_bridge:
+  ros__parameters:
+    port: "/dev/ttyACM1"
+    baud: 2000000
+    rate_hz: 250.0
+    mock: false

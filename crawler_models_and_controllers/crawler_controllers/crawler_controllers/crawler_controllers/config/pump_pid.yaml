@@ -1,0 +1,11 @@
+pump_pid_controller:
+  ros__parameters:
+    kp: 0.8
+    ki: 0.1
+    kd: 0.02
+    rate_hz: 50.0
+    u_min: 0.0
+    u_max: 1.0
+    topic_p_d: /soft/p_d
+    topic_p_act: /soft/p_act
+    topic_pwm: /soft/pump_pwm
